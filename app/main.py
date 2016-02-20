@@ -1,5 +1,6 @@
 import bottle
 import os
+from game_elements import Grid
 
 
 @bottle.route('/static/<path:path>')
@@ -26,6 +27,13 @@ def start():
 
     # TODO: Do things with data
 
+    taunts = [
+        "I've got a bad feeling about this",
+        "This is not going to end well",
+        "Oh boy am I in trouble",
+        "I think I bit off more than I can chew..."
+    ]
+
     return {
         'taunt': 'battlesnake-python!'
     }
@@ -34,6 +42,11 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    
+    grid = Grid(data['height'],data['width'])
+    grid.add_food(data['food'])
+    
+    print grid
 
     # TODO: Do things with data
 
