@@ -42,7 +42,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    print data
+    print str(data)
     
     grid = Grid(data['height'],data['width'])
     grid.add_food(data['food'])
