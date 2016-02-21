@@ -1,6 +1,7 @@
 import bottle
 import os
 from game_elements import Grid
+import json
 
 
 @bottle.route('/static/<path:path>')
@@ -42,7 +43,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    print str(data)
+    print json.dumps(data)
     
     grid = Grid(data['height'],data['width'])
     grid.add_food(data['food'])
