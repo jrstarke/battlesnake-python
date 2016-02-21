@@ -2,6 +2,7 @@ import bottle
 import os
 from game_elements import Grid
 import json
+from app import game_elements
 
 
 @bottle.route('/static/<path:path>')
@@ -47,13 +48,16 @@ def move():
     
     grid = Grid(data['height'],data['width'])
     grid.add_food(data['food'])
+    grid.add_snakes(data['snakes'])
     
     print grid
 
     # TODO: Do things with data
+    x,y = game_elements.my_snake_position
+    move = grid.get_move(x,y)
 
     return {
-        'move': 'north',
+        'move': move,
         'taunt': 'battlesnake-python!'
     }
 
